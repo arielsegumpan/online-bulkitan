@@ -53,7 +53,7 @@ class RegisterShop extends RegisterTenant
             $shop = Shop::create($data);
 
             $shop->users()->attach(Auth::id());
-
+    
             // Tell Spatie which tenant (team) these roles/permissions belong to
             app(PermissionRegistrar::class)->setPermissionsTeamId($shop->id);
 
