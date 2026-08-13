@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Permission;
+use App\Models\Role;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Permission\PermissionRegistrar;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        app(PermissionRegistrar::class)
+            ->setPermissionClass(Permission::class)
+            ->setRoleClass(Role::class);
+
+         Model::automaticallyEagerLoadRelationships();
     }
+
 }

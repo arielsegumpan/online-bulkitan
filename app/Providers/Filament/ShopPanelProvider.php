@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Providers\Filament;
+
+use App\Filament\Pages\RegisterShop;
+use App\Http\Middleware\ApplyShopScopes;
+use App\Models\Shop;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use BezhanSalleh\FilamentShield\Middleware\SyncShieldTenant;
+use Filament\Http\Middleware\Authenticate;
+use Filament\Http\Middleware\AuthenticateSession;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Pages\Dashboard;
+use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\Support\Colors\Color;
+use Filament\Widgets\AccountWidget;
+use Filament\Widgets\FilamentInfoWidget;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+
+class ShopPanelProvider extends PanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            ->default()
+            ->id('shop')
+            ->path('shop')
+            ->login()
+            ->registration()
+            ->colors([
+                'primary' => Color::Blue,
+            ])
+            ->font('Albert Sans')
+            ->sidebarWidth('15rem')
+            ->spa(hasPrefetching: true)
+            ->brandLogo(asset('imgs/bulkit_logo.png', true))
+            ->brandLogoHeight('5rem')
+            ->favicon(asset('imgs/bulkit_logo.png'))
+            ->topBar(false)
+            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
+            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->pages([
+                Dashboard::class,
+            ])
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->widgets([
+                AccountWidget::class,
+                FilamentInfoWidget::class,
+            ])
+            ->middleware([
+                EncryptCookies::class,
+                AddQueuedCookiesToResponse::class,
+                StartSession::class,
+                AuthenticateSession::class,
+                ShareErrorsFromSession::class,
+                PreventRequestForgery::class,
+                SubstituteBindings::class,
+                DisableBladeIconComponents::class,
+                DispatchServingFilamentEvent::class,
+            ])
+            ->plugins([
+                FilamentShieldPlugin::make()
+                    ->navigationLabel('Roles')
+                    ->activeNavigationIcon('heroicon-s-shield-check')
+                    ->navigationGroup('Manage Users')
+                    ->navigationSort(20)
+                    ->navigationBadgeColor('success')
+                    ->scopeToTenant(true)                       // bool|Closure
+                    ->tenantRelationshipName('shops')    // string|Closure|null
+                    ->tenantOwnershipRelationshipName('shop'), // string|Closure|null,
+            ])
+            ->tenantMiddleware([
+                ApplyShopScopes::class,
+                SyncShieldTenant::class,
+            ], isPersistent: true)
+            ->authMiddleware([
+                Authenticate::class,
+            ])
+            ->tenant(Shop::class, ownershipRelationship: 'shop', slugAttribute: 'slug')
+            ->tenantRegistration(RegisterShop::class);
+    }
+}

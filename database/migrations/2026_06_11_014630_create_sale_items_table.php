@@ -1,0 +1,37 @@
+<?php
+
+use App\Models\Shop;
+use App\Models\Tenant;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('sale_items', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Shop::class,'shop_id')->constrained('shops')->cascadeOnDelete();
+            $table->foreignId('sale_id')->constrained('sales')->cascadeOnDelete();
+            $table->enum('item_type', ['product','service']);
+            $table->foreignId('product_id')->nullable()->constrained('products')->nullOnDelete();
+            $table->foreignId('service_id')->nullable()->constrained('services')->nullOnDelete();
+            $table->integer('quantity');
+            $table->decimal('price', 12, 2);
+            $table->decimal('subtotal', 12, 2);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('sale_items');
+    }
+};
