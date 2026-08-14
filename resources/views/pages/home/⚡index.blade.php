@@ -12,10 +12,11 @@ new class extends Component
 <div class="relative overflow-hidden">
     <div class="max-w-340 mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div class="max-w-2xl text-center mx-auto">
-            <h1 class="block text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">Designed for you to get more
-                <span class="text-primary">simple</span>
+            <h1 class="block text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">Digitalize your vulcanizing shop to get more
+                <span class="text-primary">reliable</span>
             </h1>
-            <p class="mt-3 text-lg text-foreground">Build your business here. Take it anywhere.</p>
+            </h1>
+            <p class="mt-3 text-lg text-foreground">Connect motorists with reliable tire repair services, streamline multi-shop operations, and manage bookings effortlessly.</p>
         </div>
 
         <div class="mt-10 relative max-w-5xl mx-auto">
@@ -62,5 +63,10 @@ new class extends Component
                 </div>
         </div>
     </div>
+    
+    <livewire:pages::home.partials.featuredsection />
 </div>
 <!-- End Hero -->
+
+
+

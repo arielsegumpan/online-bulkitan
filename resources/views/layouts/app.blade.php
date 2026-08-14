@@ -27,7 +27,7 @@
 
         @livewireScripts
         @livewireMapScripts
-        <script>
+        {{-- <script>
             // It's used to prevent page load glitches.
             const html = document.querySelector('html');
             const isLightOrAuto = localStorage.getItem('hs_theme') === 'light' || (localStorage.getItem('hs_theme') === 'auto' && !window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -37,6 +37,34 @@
             else if (isDarkOrAuto && html.classList.contains('light')) html.classList.remove('light');
             else if (isDarkOrAuto && !html.classList.contains('dark')) html.classList.add('dark');
             else if (isLightOrAuto && !html.classList.contains('light')) html.classList.add('light');
+        </script> --}}
+
+        <script>
+            document.addEventListener("livewire:navigated", () => {
+                window.HSStaticMethods.autoInit();
+            })
+
+            document.addEventListener("DOMContentLoaded", () => {
+            const navbar = document.getElementById("navbar");
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 40) {
+                    navbar.classList.add(
+                        "bg-white/80",
+                        "dark:bg-neutral-900/70",
+                        "backdrop-blur-2xl",
+                        "shadow-lg"
+                    );
+                } else {
+                    navbar.classList.remove(
+                        "bg-white/80",
+                        "dark:bg-neutral-900/70",
+                        "backdrop-blur-2xl",
+                        "shadow-lg"
+                    );
+                }
+            });
+        });
         </script>
     </body>
 </html>

@@ -41,7 +41,7 @@
                 <div class="py-2 md:py-0  flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1">
                     <div class="grow">
                         <div class="flex flex-col md:flex-row md:justify-end md:items-center gap-0.5 md:gap-1">
-                            <a class="p-2 flex items-center text-sm bg-navbar-nav-active text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"
+                            <a class="p-2 px-3 flex items-center text-sm bg-navbar-nav-active text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"
                                 href="#" aria-current="page">
                                 <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -54,314 +54,7 @@
                                 Home
                             </a>
 
-                            <!-- Mega Menu -->
-                            <div
-                                class="hs-dropdown [--strategy:static] md:[--strategy:absolute] [--adaptive:none] [--is-collapse:true] md:[--is-collapse:false] ">
-                                <button id="hs-header-base-mega-menu-medium" type="button"
-                                    class="hs-dropdown-toggle w-full p-2 flex items-center text-sm text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"
-                                    aria-haspopup="menu" aria-expanded="false" aria-label="Mega Menu">
-                                    <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path
-                                            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-                                        <circle cx="12" cy="12" r="3" />
-                                    </svg>
-                                    Resources
-                                    <svg class="hs-dropdown-open:-rotate-180 md:hs-dropdown-open:rotate-0 duration-300 shrink-0 size-4 ms-auto md:ms-1"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path d="m6 9 6 6 6-6" />
-                                    </svg>
-                                </button>
-
-                                <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-150 hs-dropdown-open:opacity-100 opacity-0 relative md:w-177 lg:w-187.5 hidden z-10 top-full inset-e-0 before:absolute before:-top-5 before:inset-s-0 before:w-full before:h-5"
-                                    role="menu" aria-orientation="vertical"
-                                    aria-labelledby="hs-header-base-mega-menu-medium">
-                                    <div class="md:mx-6 lg:mx-8 md:bg-layer md:rounded-lg md:shadow-md">
-                                        <!-- Grid -->
-                                        <div class="pt-2 md:pt-0 grid grid-cols-1 md:grid-cols-5 gap-3 md:gap-0">
-                                            <div class="col-span-3 md:p-3">
-                                                <!-- Grid -->
-                                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-1">
-                                                    <div>
-                                                        <div class="flex flex-col">
-                                                            <div class="space-y-0.5">
-                                                                <span
-                                                                    class="ms-2.5 mb-2 font-semibold text-xs uppercase text-foreground">About
-                                                                    us</span>
-
-                                                                <!-- Link -->
-                                                                <a class="p-2 flex gap-x-3 hover:bg-navbar-nav-hover focus:outline-hidden focus:bg-navbar-nav-focus rounded-lg"
-                                                                    href="#">
-                                                                    <svg class="shrink-0 size-4 mt-0.5 text-foreground"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                        <path
-                                                                            d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                                                                        <path
-                                                                            d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                                                                    </svg>
-                                                                    <div class="grow">
-                                                                        <p class="text-sm text-foreground">Support Docs
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Link -->
-
-                                                                <!-- Link -->
-                                                                <a class="p-2 flex gap-x-3 hover:bg-navbar-nav-hover focus:outline-hidden focus:bg-navbar-nav-focus rounded-lg"
-                                                                    href="#">
-                                                                    <svg class="shrink-0 size-4 mt-0.5 text-foreground"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                        <rect width="7" height="7" x="14" y="3"
-                                                                            rx="1" />
-                                                                        <path
-                                                                            d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3" />
-                                                                    </svg>
-                                                                    <div class="grow">
-                                                                        <p class="text-sm text-foreground">Integrations
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Link -->
-
-                                                                <!-- Link -->
-                                                                <a class="p-2 flex gap-x-3 hover:bg-navbar-nav-hover focus:outline-hidden focus:bg-navbar-nav-focus rounded-lg"
-                                                                    href="#">
-                                                                    <svg class="shrink-0 size-4 mt-0.5 text-foreground"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                        <path
-                                                                            d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                                                                        <polyline points="14 2 14 8 20 8" />
-                                                                        <line x1="16" x2="8" y1="13" y2="13" />
-                                                                        <line x1="16" x2="8" y1="17" y2="17" />
-                                                                        <line x1="10" x2="8" y1="9" y2="9" />
-                                                                    </svg>
-                                                                    <div class="grow">
-                                                                        <p class="text-sm text-foreground">Guides</p>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Link -->
-
-                                                                <!-- Link -->
-                                                                <a class="p-2 flex gap-x-3 hover:bg-navbar-nav-hover focus:outline-hidden focus:bg-navbar-nav-focus rounded-lg"
-                                                                    href="#">
-                                                                    <svg class="shrink-0 size-4 mt-0.5 text-foreground"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                        <path d="m7 11 2-2-2-2" />
-                                                                        <path d="M11 13h4" />
-                                                                        <rect width="18" height="18" x="3" y="3" rx="2"
-                                                                            ry="2" />
-                                                                    </svg>
-                                                                    <div class="grow">
-                                                                        <p class="text-sm text-foreground">API Reference
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Link -->
-
-                                                                <!-- Link -->
-                                                                <a class="p-2 flex gap-x-3 hover:bg-navbar-nav-hover focus:outline-hidden focus:bg-navbar-nav-focus rounded-lg"
-                                                                    href="#">
-                                                                    <svg class="shrink-0 size-4 mt-0.5 text-foreground"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                                                                    </svg>
-                                                                    <div class="grow">
-                                                                        <p class="text-sm text-foreground">API Status
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Link -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Col -->
-
-                                                    <div>
-                                                        <div class="flex flex-col">
-                                                            <div class="space-y-0.5">
-                                                                <span
-                                                                    class="ms-2.5 mb-2 font-semibold text-xs uppercase text-foreground">Support</span>
-
-                                                                <!-- Link -->
-                                                                <a class="p-2 flex gap-x-3 hover:bg-navbar-nav-hover focus:outline-hidden focus:bg-navbar-nav-focus rounded-lg"
-                                                                    href="#">
-                                                                    <svg class="shrink-0 size-4 mt-0.5 text-foreground"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                        <circle cx="12" cy="12" r="10" />
-                                                                        <path
-                                                                            d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                                                                        <path d="M12 17h.01" />
-                                                                    </svg>
-                                                                    <div class="grow">
-                                                                        <p class="text-sm text-foreground">Help Center
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Link -->
-
-                                                                <!-- Link -->
-                                                                <a class="p-2 flex gap-x-3 hover:bg-navbar-nav-hover focus:outline-hidden focus:bg-navbar-nav-focus rounded-lg"
-                                                                    href="#">
-                                                                    <svg class="shrink-0 size-4 mt-0.5 text-foreground"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                        <circle cx="12" cy="12" r="4" />
-                                                                        <path
-                                                                            d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
-                                                                    </svg>
-                                                                    <div class="grow">
-                                                                        <p class="text-sm text-foreground">Developer Hub
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Link -->
-
-                                                                <!-- Link -->
-                                                                <a class="p-2 flex gap-x-3 hover:bg-navbar-nav-hover focus:outline-hidden focus:bg-navbar-nav-focus rounded-lg"
-                                                                    href="#">
-                                                                    <svg class="shrink-0 size-4 mt-0.5 text-foreground"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                        <path
-                                                                            d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                                                        <circle cx="9" cy="7" r="4" />
-                                                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                                                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                                                    </svg>
-                                                                    <div class="grow">
-                                                                        <p class="text-sm text-foreground">Community
-                                                                            Forum</p>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Link -->
-                                                            </div>
-
-                                                            <div class="mt-3 md:mt-7 space-y-0.5">
-                                                                <span
-                                                                    class="ms-2.5 mb-2 font-semibold text-xs uppercase text-foreground">Partners</span>
-
-                                                                <!-- Link -->
-                                                                <a class="p-2 flex gap-x-3 hover:bg-navbar-nav-hover focus:outline-hidden focus:bg-navbar-nav-focus rounded-lg"
-                                                                    href="#">
-                                                                    <svg class="shrink-0 size-4 mt-0.5 text-foreground"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                        <path
-                                                                            d="M4 7V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-6" />
-                                                                        <polyline points="14 2 14 8 20 8" />
-                                                                        <path d="M5 17a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                                                                        <path d="M7 16.5 8 22l-3-1-3 1 1-5.5" />
-                                                                    </svg>
-                                                                    <div class="grow">
-                                                                        <p class="text-sm text-foreground">Become a
-                                                                            Partner</p>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Link -->
-
-                                                                <!-- Link -->
-                                                                <a class="p-2 flex gap-x-3 hover:bg-navbar-nav-hover focus:outline-hidden focus:bg-navbar-nav-focus rounded-lg"
-                                                                    href="#">
-                                                                    <svg class="shrink-0 size-4 mt-0.5 text-foreground"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                        <path d="m15 5 4 4" />
-                                                                        <path
-                                                                            d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13" />
-                                                                        <path d="m8 6 2-2" />
-                                                                        <path
-                                                                            d="m2 22 5.5-1.5L21.17 6.83a2.82 2.82 0 0 0-4-4L3.5 16.5Z" />
-                                                                        <path d="m18 16 2-2" />
-                                                                        <path
-                                                                            d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17" />
-                                                                    </svg>
-                                                                    <div class="grow">
-                                                                        <p class="text-sm text-foreground">Build on
-                                                                            Preline</p>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Link -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Col -->
-                                                </div>
-                                                <!-- End Grid -->
-                                            </div>
-                                            <!-- End Col -->
-
-                                            <div class="md:col-span-2">
-                                                <div
-                                                    class="p-2 md:p-4 md:h-full md:flex-1 flex flex-col md:bg-muted md:rounded-br-lg">
-                                                    <span
-                                                        class="mb-2 font-semibold text-xs uppercase text-foreground">Customer
-                                                        stories</span>
-
-                                                    <!-- Link -->
-                                                    <a class="group flex flex-row items-center md:items-start md:flex-col gap-4 md:gap-2 focus:outline-hidden"
-                                                        href="#">
-                                                        <img class="shrink-0 md:w-full size-28 object-cover rounded-lg"
-                                                            src="https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80"
-                                                            alt="Customer Story Image">
-                                                        <div class="grow">
-                                                            <p class="text-sm text-foreground">Preline Projects has
-                                                                proved to be most efficient cloud based project tracking
-                                                                and bug tracking tool.</p>
-                                                            <p
-                                                                class="mt-3 inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline font-medium">
-                                                                Learn more
-                                                                <svg class="shrink-0 size-4 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1"
-                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round">
-                                                                    <path d="m9 18 6-6-6-6" />
-                                                                </svg>
-                                                            </p>
-                                                        </div>
-                                                    </a>
-                                                    <!-- End Link -->
-                                                </div>
-                                            </div>
-                                            <!-- End Col -->
-                                        </div>
-                                        <!-- End Grid -->
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Mega Menu -->
-
-                            <a class="p-2 flex items-center text-sm text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"
+                            <a class="p-2 px-3 flex items-center text-sm text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"
                                 href="#">
                                 <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -373,7 +66,7 @@
                                 Shop
                             </a>
 
-                            <a class="p-2 flex items-center text-sm text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"
+                            <a class="p-2 px-3 flex items-center text-sm text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"
                                 href="#">
                                 <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -387,7 +80,7 @@
                                 About
                             </a>
 
-                            <a class="p-2 flex items-center text-sm text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"
+                            <a class="p-2 px-3 flex items-center text-sm text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"
                                 href="#">
                                 <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -447,7 +140,9 @@
                         </a>
                         <a class="py-2 px-2.5 inline-flex items-center font-medium text-sm rounded-lg bg-primary text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none"
                             href="{{ route('filament.shop.auth.register') }}">
-                            Get started
+
+                            <svg class="size-4 me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="48 139.59 48 216 208 216 208 139.59" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/><path d="M54,40H202a8,8,0,0,1,7.69,5.8L224,96H32L46.34,45.8A8,8,0,0,1,54,40Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/><path d="M96,96v16a32,32,0,0,1-64,0V96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/><path d="M160,96v16a32,32,0,0,1-64,0V96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/><path d="M224,96v16a32,32,0,0,1-64,0V96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/></svg>
+                            Register shop
                         </a>
                     </div>
                     <!-- End Button Group -->

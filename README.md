@@ -1,4 +1,17 @@
-# 🛞 Online Bulkitan
+<div align="center">
+    
+<table style="border: none!important;">
+  <tr>
+    <td align="center" style="border: none!important;">
+      <img width="100" height="100" alt="bulkit_logo" src="https://github.com/user-attachments/assets/fe492558-7b64-4df5-9616-5cdeb8ef77be" />
+    </td>
+    <td style="border: none!important; vertical-align: middle;">
+      <h2><strong>Online Bulkitan</strong></h2>
+    </td>
+  </tr>
+</table>
+</div>
+<img width="2499" height="1272" alt="online-bulkitan" src="https://github.com/user-attachments/assets/4f8a1caa-a87b-4e81-ac51-06d0a649fadf" />
 
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
@@ -18,6 +31,12 @@ Online Bulkitan is a **multi-tenant vulcanizing shop management and online booki
 
 The platform is designed to support multiple vulcanizing shops (tenants) using a single system while keeping each shop's customers, bookings, services, staff, and business data logically separated.
 
+---
+## 🔬 Researchers
+- Lucky Miguel Espinas
+- Edmar Jagurin
+- Paul Amino
+- John Reiner Ortiz
 ---
 
 ## 📑 Table of Contents
