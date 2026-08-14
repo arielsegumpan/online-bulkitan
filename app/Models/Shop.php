@@ -22,6 +22,20 @@ class Shop extends Model
         ];
     }
 
+    public function getFilamentName(): string
+    {
+        return $this->name;
+    }
+
+    public function getBrandLogo()
+    {
+        if ($this->logo) {
+            return asset('storage/'.$this->logo);
+        }
+
+        return asset('imgs/bulkit_logo.png');
+    }
+
     public function users() : BelongsToMany
     {
         return $this->belongsToMany(User::class, 'shop_user','shop_id','user_id')->withTimestamps();

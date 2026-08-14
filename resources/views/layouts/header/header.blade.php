@@ -5,7 +5,9 @@
         <div class="flex justify-between items-center gap-x-1">
             <a class="flex-none font-semibold text-xl text-foreground focus:outline-hidden focus:opacity-80" href="
             {{ route('home') }}"
-                aria-label="Brand">Online-Bulkitan</a>
+                aria-label="Brand">
+                <img src="{{ asset('imgs/bulkit_logo.png') }}" class="size-18" alt="Bulkit Logo" />
+            </a>
 
             <!-- Collapse Button -->
             <button type="button"

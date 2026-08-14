@@ -2,37 +2,34 @@
 
 namespace App\Filament\Pages;
 
-use App\Models\Shop;
+use App\Models\NetShop;
 use Fahiem\FilamentPinpoint\Pinpoint;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
+use Filafly\Icons\Phosphor\Enums\Phosphor;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
-use Filament\Pages\Tenancy\RegisterTenant;
+use Filament\Pages\Tenancy\EditTenantProfile;
 use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Schema;
-use Filament\Support\Enums\Width;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\PermissionRegistrar;
 
-class RegisterShop extends RegisterTenant
+class EditShopProfile extends EditTenantProfile
 {
     public static function getLabel(): string
     {
-        return 'Register Shop';
+        return 'Shop profile';
     }
 
     public function form(Schema $schema): Schema
     {
-        return $schema
+         return $schema
             ->components([
                 Wizard::make([
                     Step::make('Shop Details')
@@ -146,42 +143,31 @@ class RegisterShop extends RegisterTenant
                 ])
                     ->submitAction(new HtmlString(Blade::render(<<<'BLADE'
                         <x-filament::button type="submit" size="sm">
-                            Register Shop
+                            Update Shop
                         </x-filament::button>
                     BLADE))),
             ]);
     }
 
-    protected function handleRegistration(array $data): Shop
+    protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        return DB::transaction(function () use ($data) {
-            $shop = Shop::create($data);
+        $oldSlug = $record->slug;
+        $newSlug = $data['slug'];
 
-            $shop->users()->attach(Auth::id());
+        $record->update($data);
 
-            // Tell Spatie which tenant (team) these roles/permissions belong to
-            app(PermissionRegistrar::class)->setPermissionsTeamId($shop->id);
+        // If slug changed, redirect to the new tenant URL
+        if ($oldSlug !== $newSlug) {
+            $this->redirect(
+                route('filament.shop.tenant', ['tenant' => $newSlug]),
+                navigate: false
+            );
+        }
 
-            $role = Role::firstOrCreate([
-                'name' => 'super-admin',
-                'guard_name' => 'web',
-                'shop_id' => $shop->id, // must match team_foreign_key column
-            ]);
-
-            $role->syncPermissions(Permission::all());
-
-            Auth::user()->assignRole($role);
-
-            return $shop;
-        });
+        return $record;
     }
 
-    public function getMaxContentWidth(): Width
-    {
-        return Width::ThreeExtraLarge;
-    }
-
-    /**
+     /**
      * Remove the default register button rendered outside the wizard.
      */
     protected function getFormActions(): array

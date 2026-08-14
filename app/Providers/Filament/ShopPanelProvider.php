@@ -2,11 +2,15 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\EditShopProfile;
 use App\Filament\Pages\RegisterShop;
 use App\Http\Middleware\ApplyShopScopes;
+use App\Http\Middleware\Filament\ApplyFilamentTenantThemeMiddleware;
 use App\Models\Shop;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use BezhanSalleh\FilamentShield\Middleware\SyncShieldTenant;
+use Filafly\Icons\Iconoir\Enums\Iconoir;
+use Filafly\Icons\Iconoir\IconoirIcons;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -51,8 +55,6 @@ class ShopPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -66,9 +68,11 @@ class ShopPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->plugins([
+                IconoirIcons::make(),
                 FilamentShieldPlugin::make()
                     ->navigationLabel('Roles')
-                    ->activeNavigationIcon('heroicon-s-shield-check')
+                    ->navigationIcon(Iconoir::ShieldBroken) 
+                    ->activeNavigationIcon(Iconoir::ShieldCheck)
                     ->navigationGroup('Manage Users')
                     ->navigationSort(20)
                     ->navigationBadgeColor('success')
@@ -77,6 +81,7 @@ class ShopPanelProvider extends PanelProvider
                     ->tenantOwnershipRelationshipName('shop'), // string|Closure|null,
             ])
             ->tenantMiddleware([
+                ApplyFilamentTenantThemeMiddleware::class,
                 ApplyShopScopes::class,
                 SyncShieldTenant::class,
             ], isPersistent: true)
@@ -84,6 +89,7 @@ class ShopPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->tenant(Shop::class, ownershipRelationship: 'shop', slugAttribute: 'slug')
-            ->tenantRegistration(RegisterShop::class);
+            ->tenantRegistration(RegisterShop::class)
+            ->tenantProfile(EditShopProfile::class);
     }
 }

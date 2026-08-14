@@ -1,58 +1,158 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛞 Online Bulkitan
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Online Bulkitan is a multi-tenant vulcanizing shop management and online booking platform built with Laravel. It allows customers to find vulcanizing shops, book tire repair services, and track their service requests online.
 
-## About Laravel
+The platform is designed to support multiple vulcanizing shops (tenants) using a single system while keeping each shop's customers, bookings, services, staff, and business data logically separated.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📌 Overview
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Getting a flat tire can be inconvenient, especially when a customer does not know which nearby vulcanizing shop is available.
 
-## Learning Laravel
+Online Bulkitan provides a digital solution where customers can:
+* Find available vulcanizing shops
+* View available tire repair services
+* Book a repair appointment
+* Provide information about their flat tire
+* Select their preferred schedule
+* Monitor booking status
+* Receive updates about their repair request
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Meanwhile, vulcanizing shop owners can manage their own shop through a dedicated tenant environment.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 🎯 Project Goals
 
-## Agentic Development
+The main objectives of Online Bulkitan are to:
+* Digitize traditional vulcanizing shop operations.
+* Allow customers to book tire repair services online.
+* Support multiple vulcanizing shops within one platform.
+* Separate tenant/shop data securely.
+* Help shop owners manage bookings and services.
+* Reduce customer waiting time.
+* Provide customers with better visibility of their repair requests.
+* Create a scalable foundation for future features such as payments, maps, notifications, and mobile applications.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## 🏢 Multi-Tenant Architecture
 
-php artisan boost:install
+Online Bulkitan follows a multi-tenant architecture. A single application can serve multiple vulcanizing shops.
+
+```text
+                    ONLINE BULKITAN
+                          │
+              ┌───────────┴───────────┐
+              │       Platform        │
+              │       Admin           │
+              └───────────┬───────────┘
+                          │
+       ┌──────────────────┼──────────────────┐
+       │                  │                  │
+       ▼                  ▼                  ▼
+  Vulcanizing         Vulcanizing       Vulcanizing
+     Shop A              Shop B             Shop C
+     Tenant              Tenant             Tenant
+       │                  │                  │
+       ▼                  ▼                  ▼
+ Customers            Customers          Customers
+ Bookings             Bookings           Bookings
+ Services             Services           Services
+ Staff                Staff              Staff
+
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Each vulcanizing shop operates within its own tenant context.
 
-## Contributing
+For example:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```text
+Shop A
+├── Customers
+├── Services
+├── Bookings
+├── Staff
+└── Transactions
 
-## Code of Conduct
+Shop B
+├── Customers
+├── Services
+├── Bookings
+├── Staff
+└── Transactions
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Shop A should not be able to access Shop B's business data.
 
-## Security Vulnerabilities
+# 🚀 Installation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/online-bulkitan.git
+cd online-bulkitan
+```
 
-## License
+### 2. Install PHP dependencies
+```bash
+composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Install frontend dependencies
+```bash
+npm install
+```
+
+### 4. Create the environment file
+```bash
+cp .env.example .env
+```
+*For Windows:*
+```bash
+copy .env.example .env
+```
+
+### 5. Generate the application key
+```bash
+php artisan key:generate
+```
+
+### 6. Configure the database
+Update your `.env` file:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=online_bulkitan
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 7. Run migrations
+```bash
+php artisan migrate
+```
+If the project includes seeders:
+```bash
+php artisan db:seed
+```
+*Or:*
+```bash
+php artisan migrate --seed
+```
+
+### 8. Build frontend assets
+```bash
+npm run build
+```
+*For development:*
+```bash
+npm run dev
+```
+
+### 9. Start the Laravel server
+```bash
+php artisan serve
+```
+The application will normally be available at: `http://127.0.0.1:8000`

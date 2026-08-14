@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Appointment;
 use App\Models\User;
 use Closure;
 use Filament\Facades\Filament;
@@ -12,12 +13,21 @@ use Symfony\Component\HttpFoundation\Response;
 class ApplyShopScopes
 {
     /**
-     * Models that should be automatically scoped to the current tenant.
+     * Models scoped via a BelongsToMany 'shops' relationship.
      *
      * @var array<class-string>
      */
-    protected array $tenantScopedModels = [
-        User::class
+    protected array $manyToManyModels = [
+        User::class,
+    ];
+
+    /**
+     * Models scoped via a BelongsTo 'shop' relationship (single shop_id column).
+     *
+     * @var array<class-string>
+     */
+    protected array $belongsToModels = [
+        Appointment::class,
     ];
 
     /**
@@ -28,13 +38,20 @@ class ApplyShopScopes
     public function handle(Request $request, Closure $next): Response
     {
         if ($tenant = Filament::getTenant()) {
-            foreach ($this->tenantScopedModels as $model) {
+            foreach ($this->manyToManyModels as $model) {
                 $model::addGlobalScope(
                     'shop',
                     fn (Builder $query) => $query->whereHas(
                         'shops',
                         fn (Builder $q) => $q->whereKey($tenant->getKey())
                     ),
+                );
+            }
+
+            foreach ($this->belongsToModels as $model) {
+                $model::addGlobalScope(
+                    'shop',
+                    fn (Builder $query) => $query->whereBelongsTo($tenant),
                 );
             }
         }
