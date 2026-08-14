@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -42,6 +43,11 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     public function shops() : BelongsToMany
     {
         return $this->belongsToMany(Shop::class, 'shop_user','user_id','shop_id')->withTimestamps();
+    }
+
+    public function appointments() : HasMany
+    {
+        return $this->hasMany(Appointment::class, 'customer_id', 'id');
     }
     
     public function getTenants(Panel $panel): Collection

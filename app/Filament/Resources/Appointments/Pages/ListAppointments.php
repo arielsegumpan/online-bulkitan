@@ -11,7 +11,7 @@ class ListAppointments extends ListRecords
 {
     protected static string $resource = AppointmentResource::class;
 
-     protected function getHeaderActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             CreateAction::make()->icon(Iconoir::Plus)->label('New Appointment'),

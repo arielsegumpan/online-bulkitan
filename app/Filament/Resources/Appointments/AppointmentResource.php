@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Appointments;
 
+use App\Filament\Clusters\Appointments\AppointmentsCluster;
 use App\Filament\Resources\Appointments\Pages\CreateAppointment;
 use App\Filament\Resources\Appointments\Pages\EditAppointment;
 use App\Filament\Resources\Appointments\Pages\ListAppointments;
@@ -14,7 +15,6 @@ use BackedEnum;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class AppointmentResource extends Resource
@@ -24,6 +24,8 @@ class AppointmentResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Iconoir::CalendarCheck;
 
     protected static ?string $recordTitleAttribute = 'appointment_number';
+
+    protected static ?string $cluster = AppointmentsCluster::class;
 
     public static function form(Schema $schema): Schema
     {

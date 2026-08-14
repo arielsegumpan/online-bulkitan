@@ -1,19 +1,27 @@
 <?php
 
-namespace App\Filament\Resources\Users\Pages;
+namespace App\Filament\Clusters\Appointments\Resources\Services\Pages;
 
-use App\Filament\Resources\Users\UserResource;
+use App\Filament\Clusters\Appointments\Resources\Services\ServiceResource;
+use App\Models\Service;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
 
-class EditUser extends EditRecord
+class EditService extends EditRecord
 {
-    protected static string $resource = UserResource::class;
+    protected static string $resource = ServiceResource::class;
 
-     protected function getHeaderActions(): array
+    public function getTitle(): string | Htmlable
+    {
+        /** @var Service */
+        $record = $this->getRecord();
+        return 'Edit ' . $record->appointment_number;
+    }
+
+    protected function getHeaderActions(): array
     {
         return [
             ViewAction::make()->icon(Iconoir::Eye),
@@ -28,10 +36,5 @@ class EditUser extends EditRecord
     protected function mutateFormDataBeforeSave(array $data): array
     {
         return $data;
-    }
-
-    public function getTitle(): string | Htmlable
-    {
-        return 'Edit Staff';
     }
 }

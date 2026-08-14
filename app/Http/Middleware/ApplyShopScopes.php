@@ -3,6 +3,9 @@
 namespace App\Http\Middleware;
 
 use App\Models\Appointment;
+use App\Models\AppointmentService;
+use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\User;
 use Closure;
 use Filament\Facades\Filament;
@@ -28,6 +31,9 @@ class ApplyShopScopes
      */
     protected array $belongsToModels = [
         Appointment::class,
+        AppointmentService::class,
+        ServiceCategory::class,
+        Service::class,
     ];
 
     /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Appointments\Tables;
+namespace App\Filament\Clusters\Appointments\Resources\Services\Tables;
 
-use App\Filament\Resources\Appointments\AppointmentResource;
+use App\Filament\Clusters\Appointments\Resources\Services\ServiceResource;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -11,41 +11,35 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class AppointmentsTable
+class ServicesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('appointment_number')
+                 TextColumn::make('service_name')
                     ->searchable(),
 
-                TextColumn::make('customer.name')
+                TextColumn::make('serviceCategory.name')
                     ->searchable(),
-
-                TextColumn::make('vehicle.id')
-                    ->searchable(),
-
-                TextColumn::make('employee.name')
-                    ->searchable(),
-                
-                TextColumn::make('start_time')
-                    ->dateTime()
-                    ->sortable(),
-
-                TextColumn::make('end_time')
-                    ->dateTime()
-                    ->sortable(),
-
-                TextColumn::make('status')
-                    ->badge(),
-                TextColumn::make('created_by')
+               
+                TextColumn::make('service_duration_minutes')
                     ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
+
+                TextColumn::make('service_price')
+                    ->money()
+                    ->sortable(),
+
+                IconColumn::make('is_mobile_service')
+                    ->boolean(),
+
+                IconColumn::make('is_active')
+                    ->boolean(),
 
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -77,13 +71,13 @@ class AppointmentsTable
             ->deferLoading()
             ->emptyStateActions([
                 Action::make('create')
-                    ->label('New Appointment')
+                    ->label('New Service')
                     ->url(
-                        AppointmentResource::getUrl('create'))
+                        ServiceResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
                     ->button(),
             ])
-            ->emptyStateIcon(Iconoir::CalendarCheck)
-            ->emptyStateHeading('No appointments are created');
+            ->emptyStateIcon(Iconoir::Tools)
+            ->emptyStateHeading('No services are created');
     }
 }

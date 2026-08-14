@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Appointments\Tables;
+namespace App\Filament\Clusters\Appointments\Resources\ServiceCategories\Tables;
 
-use App\Filament\Resources\Appointments\AppointmentResource;
+use App\Filament\Clusters\Appointments\Resources\ServiceCategories\ServiceCategoryResource;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -14,46 +14,24 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class AppointmentsTable
+class ServiceCategoriesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('appointment_number')
+                TextColumn::make('name')
                     ->searchable(),
-
-                TextColumn::make('customer.name')
-                    ->searchable(),
-
-                TextColumn::make('vehicle.id')
-                    ->searchable(),
-
-                TextColumn::make('employee.name')
-                    ->searchable(),
-                
-                TextColumn::make('start_time')
-                    ->dateTime()
-                    ->sortable(),
-
-                TextColumn::make('end_time')
-                    ->dateTime()
-                    ->sortable(),
-
-                TextColumn::make('status')
-                    ->badge(),
-                TextColumn::make('created_by')
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
+                TextColumn::make('description')
+                    ->label('Description')
+                    ->wrap(50)
+                    ->limit(50),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('M j, Y g:i A')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                    
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('M j, Y g:i A')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -77,13 +55,13 @@ class AppointmentsTable
             ->deferLoading()
             ->emptyStateActions([
                 Action::make('create')
-                    ->label('New Appointment')
+                    ->label('New Category')
                     ->url(
-                        AppointmentResource::getUrl('create'))
+                        ServiceCategoryResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
                     ->button(),
             ])
-            ->emptyStateIcon(Iconoir::CalendarCheck)
-            ->emptyStateHeading('No appointments are created');
+            ->emptyStateIcon(Iconoir::Folder)
+            ->emptyStateHeading('No categories are created');
     }
 }

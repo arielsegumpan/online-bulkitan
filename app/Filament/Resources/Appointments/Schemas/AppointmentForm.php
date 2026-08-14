@@ -2,13 +2,20 @@
 
 namespace App\Filament\Resources\Appointments\Schemas;
 
+use App\Enums\AppointmentStatusEnums;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
+use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class AppointmentForm
 {
@@ -16,44 +23,87 @@ class AppointmentForm
     {
         return $schema
             ->components([
-                Section::make()
-                    ->description('Manage your appointments and schedules')
+                Section::make('Appointment Information')
+                    ->description('Manage the core information, scheduling times, and service notes for this appointment.')
                     ->icon(Iconoir::CalendarCheck)
-                    ->aside()
                     ->schema([
-                        Select::make('shop_id')
-                            ->relationship('shop', 'name')
-                            ->required(),
-                        Select::make('customer_id')
-                            ->relationship('customer', 'name')
-                            ->required(),
-                        Select::make('vehicle_id')
-                            ->relationship('vehicle', 'id')
-                            ->default(null),
-                        Select::make('employee_id')
-                            ->relationship('employee', 'name')
-                            ->default(null),
                         TextInput::make('appointment_number')
-                            ->required(),
-                        DateTimePicker::make('start_time')
-                            ->required(),
-                        DateTimePicker::make('end_time')
-                            ->required(),
-                        Select::make('status')
-                            ->options([
-                                'scheduled' => 'Scheduled',
-                                'in_progress' => 'In progress',
-                                'completed' => 'Completed',
-                                'cancelled' => 'Cancelled',
-                            ])
-                            ->default('scheduled')
-                            ->required(),
+                            ->label('Appointment #')
+                            ->required()
+                            ->default(fn () => 'APMNT-'.strtoupper(Str::random(6)))
+                            ->disabled()
+                            ->dehydrated() // ensures the value is still saved even though the field is disabled
+                            ->unique(ignoreRecord: true),
+
+                        Select::make('customer_id')
+                            ->relationship(
+                                name: 'customer',
+                                titleAttribute: 'name',
+                                modifyQueryUsing: fn (Builder $query) => $query
+                                    ->whereHas('shops', fn (Builder $query) => $query->where('shops.id', Filament::getTenant()->id))
+                                    ->role('customer'),
+                            )
+                            ->required()
+                            ->native(false)
+                            ->searchable()
+                            ->optionsLimit(5)
+                            ->preload(),
+
+                        Select::make('vehicle_id')
+                            ->required()
+                            ->relationship(
+                                name: 'vehicle',
+                                titleAttribute: 'plate_number',
+                                modifyQueryUsing: fn (Builder $query) => $query->orderBy('created_at'),
+                            )
+                            ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->vehicle_type} {$record->plate_number}")
+                            ->native(false)
+                            ->searchable()
+                            ->optionsLimit(5)
+                            ->searchable(['vehicle_type', 'plate_number']),
+
+                        Select::make('employee_id')
+                            ->label('Assign Staff')
+                            ->required()
+                            ->relationship(name: 'employee', titleAttribute: 'name')
+                            ->native(false)
+                            ->searchable()
+                            ->optionsLimit(5)
+                            ->preload(),
+
+                        Group::make([
+                            DateTimePicker::make('start_time')
+                                ->prefixIcon(Iconoir::Clock)
+                                ->required()
+                                ->default(now()),
+                            DateTimePicker::make('end_time')
+                                ->prefixIcon(Iconoir::Clock)
+                                ->required(),
+                        ])
+                            ->columns([
+                                'default' => 1,
+                                'sm' => 1,
+                                'md' => 2,
+                                'lg' => 2,
+                            ]),
+
+                        ToggleButtons::make('status')
+                            ->options(AppointmentStatusEnums::class)
+                            ->default(AppointmentStatusEnums::SCHEDULED)
+                            ->required()
+                            ->inline()
+                            ->dehydrated(),
+
                         Textarea::make('notes')
                             ->default(null)
+                            ->rows(4)
                             ->columnSpanFull(),
-                        TextInput::make('created_by')
-                            ->numeric()
-                            ->default(null),
+                    ])
+                    ->columns([
+                        'default' => 1,
+                        'sm' => 1,
+                        'md' => 2,
+                        'lg' => 2,
                     ])
                     ->columnSpanFull(),
             ]);

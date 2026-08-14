@@ -51,7 +51,7 @@
                                     <path
                                         d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                                 </svg>
-                                Landing
+                                Home
                             </a>
 
                             <!-- Mega Menu -->
@@ -370,7 +370,7 @@
                                     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                                     <circle cx="12" cy="7" r="4" />
                                 </svg>
-                                Account
+                                Shop
                             </a>
 
                             <a class="p-2 flex items-center text-sm text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"
@@ -384,7 +384,7 @@
                                     <path d="M22 13a18.15 18.15 0 0 1-20 0" />
                                     <rect width="20" height="14" x="2" y="6" rx="2" />
                                 </svg>
-                                Work
+                                About
                             </a>
 
                             <a class="p-2 flex items-center text-sm text-navbar-nav-foreground hover:bg-navbar-nav-hover rounded-lg focus:outline-hidden focus:bg-navbar-nav-focus"

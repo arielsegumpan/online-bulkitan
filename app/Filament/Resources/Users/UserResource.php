@@ -11,6 +11,7 @@ use App\Filament\Resources\Users\Schemas\UserInfolist;
 use App\Filament\Resources\Users\Tables\UsersTable;
 use App\Models\User;
 use BackedEnum;
+use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -23,11 +24,13 @@ class UserResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Manage Users';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Iconoir::Community;
 
     protected static ?string $tenantOwnershipRelationshipName = 'shops';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?string $navigationLabel = 'Staff';
 
     public static function form(Schema $schema): Schema
     {
