@@ -18,6 +18,7 @@ class CreateProduct extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['sku'] = Str::of('SKU-'. $data['sku'])->upper();
+        $data['slug'] = Str::of($data['name'])->slug()->lower();
         return $data;
     }
 }

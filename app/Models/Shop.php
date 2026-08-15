@@ -82,4 +82,11 @@ class Shop extends Model
         return $this->hasMany(\App\Models\Service::class);
     }
 
+
+    /** @return HasMany<\App\Models\ProductCategory, self> */
+    public function productCategories(): HasMany
+    {
+        return $this->hasMany(\App\Models\ProductCategory::class);
+    }
+
 }

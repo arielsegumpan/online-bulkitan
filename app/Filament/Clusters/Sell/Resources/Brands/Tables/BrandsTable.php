@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Products\Tables;
+namespace App\Filament\Clusters\Sell\Resources\Brands\Tables;
 
-use App\Filament\Resources\Products\ProductResource;
-use App\Models\Product;
+use App\Filament\Clusters\Sell\Resources\Brands\BrandResource;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -16,63 +15,35 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ProductsTable
+class BrandsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('sku')
-                    ->label('SKU')
-                    ->searchable()
-                    ->badge()
-                    ->color('primary'),
-
-                ImageColumn::make('ft_img')
-                    ->imageHeight(50)
+                ImageColumn::make('brand_img')
                     ->label('Image')
+                    ->imageHeight(50)
                     ->disk('public')
                     ->visibility('public'),
-
-                TextColumn::make('name')
+                TextColumn::make('brand_name')
+                    ->label('Name')
                     ->searchable()
-                    ->description(fn (Product $record): string => $record->brand->brand_name),
-
-                TextColumn::make('category.name')
+                    ->weight('bold'),
+                TextColumn::make('brand_slug')
+                    ->label('Slug')
+                    ->searchable(),
+                TextColumn::make('brand_description')
+                    ->label('Description')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
-                TextColumn::make('barcode')
-                    ->searchable()
-                    ->placeholder('No Barcode'),
-
-                TextColumn::make('cost_price')
-                    ->money('PHP')
-                    ->sortable(),
-
-                TextColumn::make('selling_price')
-                    ->money('PHP')
-                    ->sortable(),
-
-                TextColumn::make('stock')
-                    ->numeric()
-                    ->sortable(),
-
-                TextColumn::make('low_stock_alert')
-                    ->numeric()
-                    ->sortable(),
-
-                ImageColumn::make('attachments.image')
-                    ->imageHeight(40)
-                    ->stacked()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
+                    ->wrap(50)
+                    ->limit(50),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('M d, Y g:i A')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('M d, Y g:i A')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -96,13 +67,13 @@ class ProductsTable
             ->deferLoading()
             ->emptyStateActions([
                 Action::make('create')
-                    ->label('New Product')
+                    ->label('New Brand')
                     ->url(
-                        ProductResource::getUrl('create'))
+                        BrandResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
                     ->button(),
             ])
-            ->emptyStateIcon(Iconoir::UnderlineSquare)
-            ->emptyStateHeading('No products are created');
+            ->emptyStateIcon(Iconoir::BadgeCheck)
+            ->emptyStateHeading('No brands are created');
     }
 }

@@ -148,7 +148,6 @@ class ProductForm
                             FileUpload::make('attachments.image')
                                 ->hiddenLabel()
                                 ->image()
-                                ->required()
                                 ->imageEditor()
                                 ->disk('public')
                                 ->directory('product_uploads')
