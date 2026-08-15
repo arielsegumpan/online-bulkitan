@@ -16,14 +16,18 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Shop::class,'shop_id')->constrained('shops')->cascadeOnDelete();
             $table->foreignId('category_id')->constrained('product_categories')->cascadeOnDelete();
+            $table->foreignId('brand_id')->nullable()->constrained('brands')->cascadeOnDelete();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->string('sku')->unique();
             $table->string('barcode')->nullable();
-            $table->string('brand')->nullable();
             $table->decimal('cost_price', 12, 2);
             $table->decimal('selling_price', 12, 2);
             $table->integer('stock')->default(0);
             $table->integer('low_stock_alert')->default(5);
+            $table->text('description')->nullable();
+            $table->string('ft_img')->nullable();
+            $table->json('attachments')->nullable();
             $table->timestamps();
         });
     }

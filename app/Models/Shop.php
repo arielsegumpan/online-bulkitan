@@ -54,4 +54,32 @@ class Shop extends Model
         return $this->hasMany(\App\Models\Role::class);
     }
 
+
+    /** @return HasMany<\App\Models\Appointment, self> */
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(\App\Models\Appointment::class);
+    }
+
+
+    /** @return HasMany<\App\Models\Product, self> */
+    public function products(): HasMany
+    {
+        return $this->hasMany(\App\Models\Product::class);
+    }
+
+
+    /** @return HasMany<\App\Models\ServiceCategory, self> */
+    public function serviceCategories(): HasMany
+    {
+        return $this->hasMany(\App\Models\ServiceCategory::class);
+    }
+
+
+    /** @return HasMany<\App\Models\Service, self> */
+    public function services(): HasMany
+    {
+        return $this->hasMany(\App\Models\Service::class);
+    }
+
 }

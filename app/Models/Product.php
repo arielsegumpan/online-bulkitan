@@ -7,9 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['shop_id', 'category_id', 'name', 'sku', 'barcode', 'brand', 'cost_price', 'selling_price', 'stock', 'low_stock_alert'])]
+#[Fillable(['shop_id', 'category_id','brand_id', 'name', 'sku', 'barcode', 'cost_price', 'selling_price', 'stock', 'low_stock_alert', 'description', 'ft_img', 'attachments'])]
 class Product extends Model
 {
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'attachments' => 'array',
+            'ft_img' => 'string',
+            'cost_price' => 'decimal:12,2',
+            'selling_price' => 'decimal:12,2',
+        ];
+    }
+
     public function shop() : BelongsTo
     {
         return $this->belongsTo(Shop::class, 'shop_id', 'id');
@@ -23,5 +38,10 @@ class Product extends Model
     public function inventoryLogs(): HasMany
     {
         return $this->hasMany(InventoryLog::class);
+    }
+
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
 }

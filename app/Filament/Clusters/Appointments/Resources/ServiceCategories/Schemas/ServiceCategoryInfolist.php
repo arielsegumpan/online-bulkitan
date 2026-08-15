@@ -16,7 +16,9 @@ class ServiceCategoryInfolist
                 Group::make([
                     Section::make()
                         ->schema([
-                            TextEntry::make('name'),
+                            TextEntry::make('name')
+                                ->weight('bold')
+                                ->size('lg'),
                             TextEntry::make('description')
                                 ->placeholder('-')
                                 ->columnSpanFull(),

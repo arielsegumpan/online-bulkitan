@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Clusters\Appointments\Resources\Services\Tables;
+namespace App\Filament\Resources\Products\Tables;
 
-use App\Filament\Clusters\Appointments\Resources\Services\ServiceResource;
+use App\Filament\Resources\Products\ProductResource;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -11,47 +11,48 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ServicesTable
+class ProductsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('service_name')
-                    ->searchable()
-                    ->label('Service'),
-
-                TextColumn::make('serviceCategory.name')
-                    ->label('Category')
+                TextColumn::make('sku')
+                    ->label('SKU')
+                    ->searchable(),
+                ImageColumn::make('ft_img'),
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('category.name')
                     ->searchable(),
 
-                TextColumn::make('service_duration_minutes')
-                    ->label('Duration (Minutes)')
-                    ->numeric()
-                    ->sortable(),
-
-                TextColumn::make('service_price')
-                    ->label('Price')
+                TextColumn::make('barcode')
+                    ->searchable(),
+                TextColumn::make('brand')
+                    ->searchable(),
+                TextColumn::make('cost_price')
                     ->money()
                     ->sortable(),
-
-                IconColumn::make('is_mobile_service')
-                    ->label('Mobile Service')
-                    ->boolean(),
-
-                IconColumn::make('is_active')
-                    ->label('Active')
-                    ->boolean(),
-
+                TextColumn::make('selling_price')
+                    ->money()
+                    ->sortable(),
+                TextColumn::make('stock')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('low_stock_alert')
+                    ->numeric()
+                    ->sortable(),
+                ImageColumn::make('attachments')
+                    ->imageHeight(40)
+                    ->stacked(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -77,13 +78,13 @@ class ServicesTable
             ->deferLoading()
             ->emptyStateActions([
                 Action::make('create')
-                    ->label('New Service')
+                    ->label('New Product')
                     ->url(
-                        ServiceResource::getUrl('create'))
+                        ProductResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
                     ->button(),
             ])
-            ->emptyStateIcon(Iconoir::Tools)
-            ->emptyStateHeading('No services are created');
+            ->emptyStateIcon(Iconoir::UnderlineSquare)
+            ->emptyStateHeading('No products are created');
     }
 }

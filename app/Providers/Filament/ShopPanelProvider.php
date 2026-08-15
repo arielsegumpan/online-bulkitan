@@ -9,6 +9,8 @@ use App\Http\Middleware\Filament\ApplyFilamentTenantThemeMiddleware;
 use App\Models\Shop;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use BezhanSalleh\FilamentShield\Middleware\SyncShieldTenant;
+use Caresome\FilamentAuthDesigner\AuthDesignerPlugin;
+use Caresome\FilamentAuthDesigner\Enums\MediaPosition;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filafly\Icons\Iconoir\IconoirIcons;
 use Filament\Http\Middleware\Authenticate;
@@ -19,8 +21,6 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -69,10 +69,24 @@ class ShopPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->plugins([
+                AuthDesignerPlugin::make()
+                    ->defaults(fn ($config) => $config
+                        ->media('https://images.unsplash.com/photo-1578844251758-2f71da64c96f?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+                        ->mediaPosition(MediaPosition::Cover)
+                        ->blur(8)
+                    )
+                    ->login() // Uses defaults
+                    ->registration() // Uses defaults
+                    ->passwordReset(fn ($config) => $config
+                                        ->mediaPosition(MediaPosition::Left) // Override position
+                                        ->mediaSize('45%')
+                    )
+                    ->emailVerification() // Uses defaults
+                    ->themeToggle(),
                 IconoirIcons::make(),
                 FilamentShieldPlugin::make()
                     ->navigationLabel('Roles')
-                    ->navigationIcon(Iconoir::ShieldBroken) 
+                    ->navigationIcon(Iconoir::ShieldBroken)
                     ->activeNavigationIcon(Iconoir::ShieldCheck)
                     ->navigationGroup('Manage Users')
                     ->navigationSort(20)
