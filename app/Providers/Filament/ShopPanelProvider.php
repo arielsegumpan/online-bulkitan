@@ -21,6 +21,7 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -38,16 +39,18 @@ class ShopPanelProvider extends PanelProvider
             ->path('shop')
             ->login()
             ->registration()
+            ->emailVerification()
             ->colors([
                 'primary' => Color::Blue,
             ])
             ->font('Albert Sans')
             ->sidebarWidth('15rem')
-            ->spa(hasPrefetching: true)
+            ->spa()
             ->brandLogo(asset('imgs/bulkit_logo.png', true))
             ->brandLogoHeight('5rem')
             ->favicon(asset('imgs/bulkit_logo.png'))
-            ->topBar(false)
+            ->topBar(true)
+            ->topNavigation()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
@@ -78,8 +81,8 @@ class ShopPanelProvider extends PanelProvider
                     ->login() // Uses defaults
                     ->registration() // Uses defaults
                     ->passwordReset(fn ($config) => $config
-                                        ->mediaPosition(MediaPosition::Left) // Override position
-                                        ->mediaSize('45%')
+                        ->mediaPosition(MediaPosition::Left) // Override position
+                        ->mediaSize('45%')
                     )
                     ->emailVerification() // Uses defaults
                     ->themeToggle(),
@@ -105,6 +108,17 @@ class ShopPanelProvider extends PanelProvider
             ])
             ->tenant(Shop::class, ownershipRelationship: 'shop', slugAttribute: 'slug')
             ->tenantRegistration(RegisterShop::class)
-            ->tenantProfile(EditShopProfile::class);
+            ->tenantProfile(EditShopProfile::class)
+            ->renderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): string => <<<'HTML'
+                <style>
+                    .fi-topbar-nav-groups {
+                        justify-content: center;
+                        flex: 1;
+                    }
+                </style>
+            HTML,
+            );
     }
 }

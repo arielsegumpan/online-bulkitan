@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Clusters\Appointments\Resources\ServiceCategories\Schemas;
+namespace App\Filament\Clusters\Sell\Resources\ProductCategories\Schemas;
 
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Forms\Components\Textarea;
@@ -11,16 +11,16 @@ use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 
-class ServiceCategoryForm
+class ProductCategoryForm
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
                 Section::make()
-                    ->icon(Iconoir::Folder)
-                    ->description('Manage your service categories.')
+                    ->icon(Iconoir::MenuScale)
                     ->aside()
+                    ->description('Manage your product categories.')
                     ->schema([
                         Group::make([
                             TextInput::make('name')

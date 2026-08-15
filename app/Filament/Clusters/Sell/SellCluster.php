@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Clusters\Appointments;
+namespace App\Filament\Clusters\Sell;
 
 use BackedEnum;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Clusters\Cluster;
 use Filament\Pages\Enums\SubNavigationPosition;
 
-class AppointmentsCluster extends Cluster
+class SellCluster extends Cluster
 {
-    protected static string|BackedEnum|null $navigationIcon = Iconoir::CalendarCheck;
+     protected static string|BackedEnum|null $navigationIcon = Iconoir::UnderlineSquare;
 
     protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Start;
 }

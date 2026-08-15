@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Products;
 
+use App\Filament\Clusters\Sell\SellCluster;
 use App\Filament\Resources\Products\Pages\CreateProduct;
 use App\Filament\Resources\Products\Pages\EditProduct;
 use App\Filament\Resources\Products\Pages\ListProducts;
@@ -20,9 +21,16 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Iconoir::UnderlineSquare;
+    protected static string|BackedEnum|null $navigationIcon = Iconoir::BoxIso;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?string $cluster = SellCluster::class;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Schema $schema): Schema
     {

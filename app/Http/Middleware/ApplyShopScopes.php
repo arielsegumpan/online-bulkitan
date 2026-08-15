@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use App\Models\Appointment;
 use App\Models\AppointmentService;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\User;
@@ -34,6 +36,8 @@ class ApplyShopScopes
         AppointmentService::class,
         ServiceCategory::class,
         Service::class,
+        Product::class,
+        ProductCategory::class,
     ];
 
     /**

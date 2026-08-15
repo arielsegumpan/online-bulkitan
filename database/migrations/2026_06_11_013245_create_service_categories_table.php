@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Shop::class,'shop_id')->constrained('shops')->cascadeOnDelete();
             $table->string('name');
+            $table->string('slug')->unique()->index();
             $table->text('description')->nullable();
             $table->timestamps();
         });

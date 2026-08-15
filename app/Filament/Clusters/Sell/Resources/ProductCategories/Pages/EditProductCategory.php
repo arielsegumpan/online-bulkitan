@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Filament\Clusters\Appointments\Resources\ServiceCategories\Pages;
+namespace App\Filament\Clusters\Sell\Resources\ProductCategories\Pages;
 
-use App\Filament\Clusters\Appointments\Resources\ServiceCategories\ServiceCategoryResource;
-use App\Models\ServiceCategory;
+use App\Filament\Clusters\Sell\Resources\ProductCategories\ProductCategoryResource;
+use App\Models\ProductCategory;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Str;
 
-class EditServiceCategory extends EditRecord
+class EditProductCategory extends EditRecord
 {
-    protected static string $resource = ServiceCategoryResource::class;
+    protected static string $resource = ProductCategoryResource::class;
 
     public function getTitle(): string | Htmlable
     {
-        /** @var ServiceCategory */
+        /** @var ProductCategory */
         $record = $this->getRecord();
         return 'Edit ' . $record->name;
     }
@@ -35,6 +36,7 @@ class EditServiceCategory extends EditRecord
     }
     protected function mutateFormDataBeforeSave(array $data): array
     {
+        $data['name'] = Str::of($data['name'])->title();
         return $data;
     }
 }

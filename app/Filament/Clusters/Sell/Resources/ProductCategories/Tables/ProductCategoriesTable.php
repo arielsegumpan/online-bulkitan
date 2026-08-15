@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Products\Tables;
+namespace App\Filament\Clusters\Sell\Resources\ProductCategories\Tables;
 
-use App\Filament\Resources\Products\ProductResource;
+use App\Filament\Clusters\Sell\Resources\ProductCategories\ProductCategoryResource;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -11,63 +11,27 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ProductsTable
+class ProductCategoriesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('sku')
-                    ->label('SKU')
-                    ->searchable(),
-
-                ImageColumn::make('ft_img')
-                    ->imageHeight(50)
-                    ->label('Image'),
-
                 TextColumn::make('name')
                     ->searchable(),
-
-                TextColumn::make('category.name')
-                    ->searchable(),
-
-                TextColumn::make('barcode')
-                    ->searchable(),
-
-                TextColumn::make('brand.brand_name')
-                    ->searchable(),
-
-                TextColumn::make('cost_price')
-                    ->money()
-                    ->sortable(),
-
-                TextColumn::make('selling_price')
-                    ->money()
-                    ->sortable(),
-
-                TextColumn::make('stock')
-                    ->numeric()
-                    ->sortable(),
-
-                TextColumn::make('low_stock_alert')
-                    ->numeric()
-                    ->sortable(),
-
-                ImageColumn::make('attachments')
-                    ->imageHeight(40)
-                    ->stacked()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
+                TextColumn::make('description')
+                    ->label('Description')
+                    ->wrap(50)
+                    ->limit(50),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('M j, Y g:i A')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('M j, Y g:i A')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -91,13 +55,13 @@ class ProductsTable
             ->deferLoading()
             ->emptyStateActions([
                 Action::make('create')
-                    ->label('New Product')
+                    ->label('New Category')
                     ->url(
-                        ProductResource::getUrl('create'))
+                        ProductCategoryResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
                     ->button(),
             ])
-            ->emptyStateIcon(Iconoir::UnderlineSquare)
-            ->emptyStateHeading('No products are created');
+            ->emptyStateIcon(Iconoir::Folder)
+            ->emptyStateHeading('No categories are created');
     }
 }
