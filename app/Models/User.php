@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Shop;
+use Filament\Auth\MultiFactor\Email\Concerns\InteractsWithEmailAuthentication;
+use Filament\Auth\MultiFactor\Email\Contracts\HasEmailAuthentication;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
@@ -21,11 +23,11 @@ use Spatie\Permission\Traits\HasRoles;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable implements FilamentUser, HasTenants, MustVerifyEmail
+class User extends Authenticatable implements FilamentUser, HasTenants, MustVerifyEmail, HasEmailAuthentication
 {
 
  /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use InteractsWithEmailAuthentication, HasFactory, Notifiable, HasRoles;
 
     /**
      * Get the attributes that should be cast.
@@ -37,6 +39,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants, MustVeri
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'has_email_authentication' => 'boolean', // for email verification ni sa
         ];
     }
 

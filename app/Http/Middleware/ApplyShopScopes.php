@@ -10,6 +10,7 @@ use App\Models\ProductCategory;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\User;
+use App\Models\Vehicle;
 use Closure;
 use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
@@ -40,6 +41,7 @@ class ApplyShopScopes
         Product::class,
         ProductCategory::class,
         Brand::class,
+        Vehicle::class,
     ];
 
     /**

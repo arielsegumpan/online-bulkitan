@@ -13,6 +13,7 @@ use Caresome\FilamentAuthDesigner\AuthDesignerPlugin;
 use Caresome\FilamentAuthDesigner\Enums\MediaPosition;
 use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filafly\Icons\Iconoir\IconoirIcons;
+use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -106,6 +107,9 @@ class ShopPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->multiFactorAuthentication([
+                EmailAuthentication::make(),
+            ], isRequired: true)
             ->tenant(Shop::class, ownershipRelationship: 'shop', slugAttribute: 'slug')
             ->tenantRegistration(RegisterShop::class)
             ->tenantProfile(EditShopProfile::class)

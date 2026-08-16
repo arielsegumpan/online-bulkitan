@@ -3,16 +3,23 @@
 namespace App\Filament\Resources\Appointments\Pages;
 
 use App\Filament\Resources\Appointments\AppointmentResource;
+use App\Filament\Resources\Appointments\Schemas\AppointmentForm;
+use Filafly\Icons\Iconoir\Enums\Iconoir;
 use Filament\Facades\Filament;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\CreateRecord\Concerns\HasWizard;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Wizard\Step;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class CreateAppointment extends CreateRecord
 {
+    use HasWizard;
+
     protected static string $resource = AppointmentResource::class;
 
-   public function mount(): void
+    public function mount(): void
     {
         parent::mount();
 
@@ -44,5 +51,29 @@ class CreateAppointment extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         return $data;
+    }
+
+    /**
+     * @return array<Step>
+     */
+    protected function getSteps(): array
+    {
+        return [
+            Step::make('Service Items')
+                ->schema([
+                    Section::make()
+                        ->schema([AppointmentForm::getItemsRepeater()]),
+                ]),
+
+            Step::make('Appointment Details')
+                ->schema([
+                    Section::make()
+                        ->description('Manage the core information, scheduling times, and service notes for this appointment.')
+                        ->icon(Iconoir::CalendarCheck)
+                        ->schema(AppointmentForm::getDetailsComponents())
+                        ->columns(),
+                ]),
+
+        ];
     }
 }

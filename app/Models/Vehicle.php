@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['customer_id', 'plate_number', 'vehicle_type', 'brand', 'model', 'year_model', 'tire_size',])]
+#[Fillable(['shop_id','customer_id', 'plate_number', 'vehicle_type', 'brand', 'model', 'year_model',])]
 class Vehicle extends Model
 {
+    public function shop() : BelongsTo
+    {
+        return $this->belongsTo(Shop::class, 'shop_id', 'id');
+    }
     public function customer() : BelongsTo
     {
         return $this->belongsTo(User::class, 'customer_id', 'id');

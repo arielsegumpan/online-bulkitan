@@ -89,4 +89,18 @@ class Shop extends Model
         return $this->hasMany(\App\Models\ProductCategory::class);
     }
 
+
+    /** @return HasMany<\App\Models\Vehicle, self> */
+    public function vehicles(): HasMany
+    {
+        return $this->hasMany(\App\Models\Vehicle::class);
+    }
+
+
+    /** @return HasMany<\App\Models\Brand, self> */
+    public function brands(): HasMany
+    {
+        return $this->hasMany(\App\Models\Brand::class);
+    }
+
 }
