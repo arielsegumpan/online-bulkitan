@@ -21,9 +21,9 @@ class Employee extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function services(): BelongsToMany
+    public function employeeServices(): HasMany
     {
-        return $this->belongsToMany(Service::class, 'employee_service', 'employee_id', 'service_id')->withTimestamps();
+        return $this->hasMany(EmployeeService::class, 'employee_id', 'id');
     }
 
     public function schedules(): HasMany

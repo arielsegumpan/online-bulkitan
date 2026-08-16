@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Shop;
 use Filament\Auth\MultiFactor\Email\Concerns\InteractsWithEmailAuthentication;
 use Filament\Auth\MultiFactor\Email\Contracts\HasEmailAuthentication;
 use Filament\Models\Contracts\FilamentUser;
@@ -23,11 +22,10 @@ use Spatie\Permission\Traits\HasRoles;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable implements FilamentUser, HasTenants, MustVerifyEmail, HasEmailAuthentication
+class User extends Authenticatable implements FilamentUser, HasEmailAuthentication, HasTenants, MustVerifyEmail
 {
-
- /** @use HasFactory<UserFactory> */
-    use InteractsWithEmailAuthentication, HasFactory, Notifiable, HasRoles;
+    /** @use HasFactory<UserFactory> */
+    use HasFactory, HasRoles, InteractsWithEmailAuthentication, Notifiable;
 
     /**
      * Get the attributes that should be cast.
@@ -43,17 +41,30 @@ class User extends Authenticatable implements FilamentUser, HasTenants, MustVeri
         ];
     }
 
-    //relationships
-    public function shops() : BelongsToMany
+    // relationships
+    public function shops(): BelongsToMany
     {
-        return $this->belongsToMany(Shop::class, 'shop_user','user_id','shop_id')->withTimestamps();
+        return $this->belongsToMany(Shop::class, 'shop_user', 'user_id', 'shop_id')->withTimestamps();
     }
 
-    public function appointments() : HasMany
+    public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class, 'customer_id', 'id');
     }
-    
+
+    // ADDED: mirrors appointments(); a customer's roadside requests weren't
+    // reachable from the User side before.
+    public function roadsideRequests(): HasMany
+    {
+        return $this->hasMany(RoadSideRequest::class, 'customer_id', 'id');
+    }
+
+    // ADDED: a customer's own vehicles.
+    public function vehicles(): HasMany
+    {
+        return $this->hasMany(Vehicle::class, 'customer_id', 'id');
+    }
+
     public function getTenants(Panel $panel): Collection
     {
         return $this->shops;
@@ -66,8 +77,6 @@ class User extends Authenticatable implements FilamentUser, HasTenants, MustVeri
 
     public function canAccessPanel(Panel $panel): bool
     {
-       return true;
+        return true;
     }
-    
-   
 }

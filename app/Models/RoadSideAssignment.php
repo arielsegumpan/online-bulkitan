@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
-#[Fillable(['roadside_request_id', 'employee_id', 'assigned_at', 'arrival_at', 'completed_at', 'status'])]
+#[Fillable(['shop_id', 'roadside_request_id', 'employee_id', 'assigned_at', 'arrival_at', 'completed_at', 'status'])]
 class RoadSideAssignment extends Model
 {
     public function shop() : BelongsTo

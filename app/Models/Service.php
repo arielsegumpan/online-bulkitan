@@ -21,14 +21,14 @@ class Service extends Model
         return $this->belongsTo(ServiceCategory::class, 'service_category_id', 'id');
     }
 
-    public function employees(): BelongsToMany
+    public function employeeServices(): HasMany
     {
-        return $this->belongsToMany(Employee::class, 'employee_service', 'service_id', 'employee_id')->withTimestamps();
+        return $this->hasMany(EmployeeService::class, 'service_id', 'id');
     }
 
-    public function appointments(): BelongsToMany
+    public function appointmentServices(): HasMany
     {
-        return $this->belongsToMany(Appointment::class, 'appointment_services', 'service_id', 'appointment_id');
+        return $this->hasMany(AppointmentService::class, 'service_id', 'id');
     }
 
     public function saleItems(): HasMany

@@ -36,7 +36,7 @@ class ServicesTable
 
                 TextColumn::make('service_price')
                     ->label('Price')
-                    ->money()
+                    ->money('PHP')
                     ->sortable(),
 
                 IconColumn::make('is_mobile_service')

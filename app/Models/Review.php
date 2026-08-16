@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['shop_id', 'customer_id', 'service_id', 'employee_id', 'sale_id', 'rating', 'review'])]
+#[Fillable(['shop_id', 'customer_id', 'appointment_id', 'service_id', 'employee_id', 'sale_id', 'rating', 'review'])]
 class Review extends Model
 {
     public function shop() : BelongsTo
@@ -16,6 +16,11 @@ class Review extends Model
     public function customer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'customer_id', 'id');
+    }
+
+    public function appointment(): BelongsTo
+    {
+        return $this->belongsTo(Appointment::class, 'appointment_id', 'id');
     }
 
     public function service(): BelongsTo

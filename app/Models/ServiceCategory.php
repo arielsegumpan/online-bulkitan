@@ -15,8 +15,8 @@ class ServiceCategory extends Model
         return $this->belongsTo(Shop::class, 'shop_id', 'id');
     }
 
-    public function services() : HasMany
+    public function services(): HasMany
     {
-        return $this->hasMany(Service::class, 'category_id');
+        return $this->hasMany(Service::class, 'service_category_id', 'id');
     }
 }

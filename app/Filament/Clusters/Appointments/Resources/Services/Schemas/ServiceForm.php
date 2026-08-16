@@ -13,6 +13,7 @@ use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class ServiceForm
 {
@@ -55,13 +56,14 @@ class ServiceForm
                             ->createOptionModalHeading('Create Category')
                             ->createOptionUsing(function (array $data): int {
                                 $data['shop_id'] = Filament::getTenant()->id;
+                                $data['slug'] = Str::of($data['name'])->slug()->lower();
 
                                 return ServiceCategory::create($data)->getKey();
                             })
                             ->updateOptionUsing(function (array $data, Schema $schema) {
                                 $schema->getRecord()?->update($data);
                             }),
-
+                            
                         TextInput::make('service_duration_minutes')
                             ->label('Duration')
                             ->required()

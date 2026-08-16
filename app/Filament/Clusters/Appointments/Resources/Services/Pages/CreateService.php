@@ -4,6 +4,7 @@ namespace App\Filament\Clusters\Appointments\Resources\Services\Pages;
 
 use App\Filament\Clusters\Appointments\Resources\Services\ServiceResource;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Support\Str;
 
 class CreateService extends CreateRecord
 {
@@ -16,6 +17,7 @@ class CreateService extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        $data['service_name'] = Str::of($data['service_name'])->title();
         return $data;
     }
 }
