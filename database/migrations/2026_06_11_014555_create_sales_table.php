@@ -16,6 +16,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Shop::class,'shop_id')->constrained('shops')->cascadeOnDelete();
             $table->foreignId('customer_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('appointment_id')->nullable()->constrained('appointments')->nullOnDelete();
+            $table->foreignId('roadside_request_id')->nullable()->constrained('road_side_requests')->nullOnDelete();
             $table->string('invoice_number')->unique();
             $table->decimal('subtotal', 12, 2);
             $table->decimal('discount', 12, 2)->default(0);

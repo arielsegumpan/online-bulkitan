@@ -59,7 +59,8 @@ class ProductCategoriesTable
                     ->url(
                         ProductCategoryResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
-                    ->button(),
+                    ->button()
+                     ->visible(fn (): bool => auth()->user()->can('create', ProductCategoryResource::class)),
             ])
             ->emptyStateIcon(Iconoir::Folder)
             ->emptyStateHeading('No categories are created');

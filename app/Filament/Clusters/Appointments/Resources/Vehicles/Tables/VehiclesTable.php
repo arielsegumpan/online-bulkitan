@@ -67,7 +67,8 @@ class VehiclesTable
                     ->url(
                         VehicleResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
-                    ->button(),
+                    ->button()
+                     ->visible(fn (): bool => auth()->user()->can('create', VehicleResource::class)),
             ])
             ->emptyStateIcon(Iconoir::DeliveryTruck)
             ->emptyStateHeading('No vehicles are created');

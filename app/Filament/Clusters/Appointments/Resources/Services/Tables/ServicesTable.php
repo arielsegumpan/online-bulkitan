@@ -81,7 +81,8 @@ class ServicesTable
                     ->url(
                         ServiceResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
-                    ->button(),
+                    ->button()
+                     ->visible(fn (): bool => auth()->user()->can('create', ServiceResource::class)),
             ])
             ->emptyStateIcon(Iconoir::Tools)
             ->emptyStateHeading('No services are created');

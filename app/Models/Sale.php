@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['shop_id', 'customer_id', 'invoice_number', 'subtotal', 'discount', 'tax', 'final_amount', 'payment_method', 'status', 'served_by'])]
+#[Fillable(['shop_id', 'customer_id', 'appointment_id', 'roadside_request_id', 'invoice_number', 'subtotal', 'discount', 'tax', 'final_amount', 'payment_method', 'status', 'served_by'])]
 class Sale extends Model
 {
     public function shop() : BelongsTo
@@ -28,5 +28,15 @@ class Sale extends Model
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class, 'served_by');
+    }
+
+    public function appointment(): BelongsTo
+    {
+        return $this->belongsTo(Appointment::class, 'appointment_id', 'id');
+    }
+ 
+    public function roadsideRequest(): BelongsTo
+    {
+        return $this->belongsTo(RoadSideRequest::class, 'roadside_request_id', 'id');
     }
 }

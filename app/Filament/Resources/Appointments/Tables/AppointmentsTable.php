@@ -81,7 +81,8 @@ class AppointmentsTable
                     ->url(
                         AppointmentResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
-                    ->button(),
+                    ->button()
+                    ->visible(fn (): bool => auth()->user()->can('create', AppointmentResource::class)),
             ])
             ->emptyStateIcon(Iconoir::CalendarCheck)
             ->emptyStateHeading('No appointments are created');

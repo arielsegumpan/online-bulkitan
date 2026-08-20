@@ -2,10 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\AppointmentService;
+use App\Models\Employee;
+use App\Models\Review;
+use App\Models\Sale;
+use App\Models\Shop;
+use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable([ 'shop_id', 'customer_id', 'vehicle_id', 'employee_id', 'appointment_number', 'start_time', 'end_time', 'status', 'notes', 'created_by' ])]
 class Appointment extends Model
@@ -43,5 +51,10 @@ class Appointment extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class, 'appointment_id', 'id');
+    }
+
+    public function sale(): HasOne
+    {
+        return $this->hasOne(Sale::class, 'appointment_id', 'id');
     }
 }

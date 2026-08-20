@@ -100,7 +100,8 @@ class ProductsTable
                     ->url(
                         ProductResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
-                    ->button(),
+                    ->button()
+                     ->visible(fn (): bool => auth()->user()->can('create', ProductResource::class)),
             ])
             ->emptyStateIcon(Iconoir::UnderlineSquare)
             ->emptyStateHeading('No products are created');

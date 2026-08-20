@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable([ 'shop_id', 'customer_id', 'vehicle_id', 'request_number', 'latitude', 'longitude', 'address', 'problem_type', 'description', 'status', 'requested_at', 'accepted_at', 'completed_at' ])]
 class RoadSideRequest extends Model
@@ -28,5 +29,17 @@ class RoadSideRequest extends Model
     public function assignments() : HasMany
     {
         return $this->hasMany(RoadSideAssignment::class, 'roadside_request_id');
+    }
+
+    public function roadsideServices(): HasMany
+    {
+        return $this->hasMany(RoadSideService::class, 'roadside_request_id', 'id');
+    }
+ 
+    // ADDED: the invoice generated for this callout, if any
+    // (pairs with Sale::roadsideRequest()).
+    public function sale(): HasOne
+    {
+        return $this->hasOne(Sale::class, 'roadside_request_id', 'id');
     }
 }

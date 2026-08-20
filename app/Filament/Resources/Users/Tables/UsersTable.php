@@ -67,7 +67,8 @@ class UsersTable
                     ->url(
                         UserResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
-                    ->button(),
+                    ->button()
+                    ->visible(fn (): bool => auth()->user()->can('create', UserResource::class)),
             ])
             ->emptyStateIcon(Iconoir::Community)
             ->emptyStateHeading('No staffs are created');

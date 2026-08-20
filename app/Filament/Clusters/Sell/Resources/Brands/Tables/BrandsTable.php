@@ -71,7 +71,8 @@ class BrandsTable
                     ->url(
                         BrandResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
-                    ->button(),
+                    ->button()
+                     ->visible(fn (): bool => auth()->user()->can('create', BrandResource::class)),
             ])
             ->emptyStateIcon(Iconoir::BadgeCheck)
             ->emptyStateHeading('No brands are created');

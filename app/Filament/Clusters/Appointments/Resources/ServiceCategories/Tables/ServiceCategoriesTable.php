@@ -59,7 +59,8 @@ class ServiceCategoriesTable
                     ->url(
                         ServiceCategoryResource::getUrl('create'))
                     ->icon(Iconoir::Plus)
-                    ->button(),
+                    ->button()
+                     ->visible(fn (): bool => auth()->user()->can('create', ServiceCategoryResource::class)),
             ])
             ->emptyStateIcon(Iconoir::Folder)
             ->emptyStateHeading('No categories are created');
